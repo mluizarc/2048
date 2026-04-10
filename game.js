@@ -69,6 +69,9 @@ class Game {
       touchStartX = e.touches[0].clientX;
       touchStartY = e.touches[0].clientY;
     }, { passive: true });
+    document.addEventListener('touchmove', (e) => {
+      e.preventDefault(); // block page scroll while swiping
+    }, { passive: false });
     document.addEventListener('touchend', (e) => {
       if (this.animating || this.gameOver || (this.won && !this.continued)) return;
       const dx = e.changedTouches[0].clientX - touchStartX;
