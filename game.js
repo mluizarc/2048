@@ -61,6 +61,25 @@ class Game {
         document.body.setAttribute('data-theme', btn.dataset.theme);
       });
     });
+
+    // Swipe support for mobile
+    let touchStartX = 0;
+    let touchStartY = 0;
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+    document.addEventListener('touchend', (e) => {
+      if (this.animating || this.gameOver || (this.won && !this.continued)) return;
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      const dy = e.changedTouches[0].clientY - touchStartY;
+      if (Math.abs(dx) < 20 && Math.abs(dy) < 20) return; // too short, ignore
+      if (Math.abs(dx) > Math.abs(dy)) {
+        this._handleMove(dx > 0 ? 'right' : 'left');
+      } else {
+        this._handleMove(dy > 0 ? 'down' : 'up');
+      }
+    }, { passive: true });
   }
 
   // ── Tile spawning ──────────────────────────────────────────────────

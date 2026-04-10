@@ -4,6 +4,20 @@
   padding: 0;
 }
 
+/* ── Responsive ───────────────────────────────────────────────────── */
+
+@media (max-width: 460px) {
+  body { padding: 20px 8px; }
+  h1   { font-size: 1.8rem; }
+
+  /* Scale the fixed 410px grid to fit the screen */
+  #grid-container {
+    transform-origin: top center;
+    transform: scale(calc((100vw - 16px) / 410px));
+    margin-bottom: calc((410px * ((100vw - 16px) / 410px)) - 410px);
+  }
+}
+
 /* ── Themes ───────────────────────────────────────────────────────── */
 
 :root {
