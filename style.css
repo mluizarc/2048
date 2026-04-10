@@ -91,6 +91,7 @@ body {
   min-height: 100vh;
   padding: 32px 16px;
   color: #333;
+  touch-action: none; /* prevent page scroll during swipe */
 }
 
 #header {
